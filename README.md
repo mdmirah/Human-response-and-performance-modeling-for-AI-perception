@@ -5,7 +5,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![AIAA Paper](https://img.shields.io/badge/AIAA%20Scitech%202026-2734-red.svg)](https://doi.org/10.2514/6.2026-2734)
 
-A comprehensive framework for analyzing human performance states by integrating physiological signals (heart rate, pupil diameter) with task performance metrics (deviation, rate of change). Designed for aviation psychology research and AI-based operator state monitoring.
+A framework for analyzing human performance states by integrating physiological signals (heart rate, pupil diameter) with task performance metrics (deviation, rate of change). Initially developed for Human-AI perception and teaming for a flight task with application potential in Autonomous driving and Adaptive Assistance in First Person Shooter Video Games.
 
 ## 📄 Citation and Academic Context
 
@@ -13,8 +13,7 @@ The theoretical framework and core methodology implemented in this repository we
 
 **Rahman, M. M., & Fala, N. (2026). "A Multimodal Framework for Assessing Fitness to Fly in Flight Training."** *AIAA Scitech 2026 Forum*, Paper AIAA 2026-2734. https://doi.org/10.2514/6.2026-2734
 
-This paper introduces the **Fitness-to-Fly (F2Y)** score, an operational construct that integrates a pilot's heart rate with flight performance metrics to estimate their internal state of fitness. The framework defines four F2Y states (Relaxed Controlled, Stressed Controlled, Relaxed Uncontrolled, and Stressed Uncontrolled) and addresses the critical disconnect between psychophysiological measures and flight performance that individual methods cannot capture.
-
+This paper introduces the **Fitness-to-Fly (F2Y)** score, an operational construct built on this framework that integrates a pilot's heart rate with flight performance metrics to estimate their internal state of fitness. 
 **If you use this code in your research, please cite both the original paper (for the theoretical framework) and this repository (for the code implementation).**
 
 ## 🎯 Key Features
@@ -24,6 +23,7 @@ This paper introduces the **Fitness-to-Fly (F2Y)** score, an operational constru
 - **Comprehensive Statistics**: Calculates state durations, transitions, and episode analysis
 - **Rich Visualizations**: Generates publication-quality plots with state-based coloring
 - **Self-Transition Tracking**: Includes same-state persistence in transition analysis
+- **Statistical Validation**: Produces high-quality, statistically significant data with inherent structure
 
 ## 📊 State Classification Logic (F2Y Framework)
 
@@ -43,15 +43,47 @@ The system classifies operator states along two dimensions as defined in Rahman 
 3. **Stressed Controlled** 🔵 - High physiological arousal with good performance
 4. **Relaxed Controlled** 🟢 - Low physiological arousal with good performance (Ideal state)
 
-## 📚 Citation Guidelines
+## 📊 Data Quality and Validation
 
-The Fitness-to-Fly (F2Y) framework used in this study was originally proposed by 
-Rahman and Fala [1], and the implementation follows the open-source code repository 
-accompanying that work [2].
+This framework generates **high-quality behavioral data** with demonstrated statistical significance:
 
-[1] Rahman, M. M., and Fala, N., "A Multimodal Framework for Assessing Fitness to 
-    Fly in Flight Training," AIAA Scitech 2026 Forum, AIAA Paper 2026-2734, 2026.
-    doi: 10.2514/6.2026-2734
+- **Temporal Precision**: Captures exact time spent in each of the four F2Y states at 60 Hz sampling rate
+- **Transition Dynamics**: Quantifies transition counts and patterns between states, revealing operator state evolution
+- **Episode Analysis**: Provides detailed statistics on state durations, including average, minimum, and maximum episode lengths
+- **Statistical Structure**: The extracted features (state durations, transition matrices, episode characteristics) exhibit inherent statistical structure that has been validated through rigorous analysis
 
-[2] Rahman, M. M., and Fala, N., "Human Behavior and Task Performance Modeling for 
-    AI Perception," GitHub repository, 2026. https://github.com/yourusername/human-behavior-modeling
+The framework's ability to produce statistically significant data makes it ideal for:
+- Training machine learning models for state prediction
+- Developing adaptive autonomy systems
+- Establishing baselines for operator performance
+- Identifying critical transitions in human-AI teaming scenarios
+
+## 🧠 Foundation for Human-AI Perception
+
+This framework and the high-quality data it produces lay the essential groundwork for **Human-AI perception systems** that can:
+
+1. **Real-time State Awareness**: Enable AI systems to perceive and track human operator states continuously
+2. **Adaptive Autonomy**: Develop systems that adjust their level of automation based on detected operator state
+3. **Predictive Intervention**: Anticipate performance degradation before it occurs
+4. **Personalized Assistance**: Tailor support based on individual operator state patterns
+
+The statistically validated data structure provides the foundation for training robust AI models that can:
+- Recognize operator state from physiological and performance metrics
+- Predict state transitions before they occur
+- Optimize timing for automation mode switches
+- Learn individual operator patterns for personalized assistance
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/human-behavior-modeling.git
+cd human-behavior-modeling
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install the package (optional)
+pip install -e .
