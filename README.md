@@ -7,7 +7,7 @@
 
 A framework for analyzing human performance states by integrating physiological signals (heart rate, pupil diameter) with task performance metrics (deviation, rate of change). Initially developed for Human-AI perception and teaming for a flight task with application potential in Autonomous driving and First Person Shooter Video Games.
 
-The theoretical framework and core methodology implemented in this repository were originally published in:
+I originally publishhed the theoretical framework and core methodologyin this repository in:
 
 **Rahman, M. M., & Fala, N. (2026). "A Multimodal Framework for Assessing Fitness to Fly in Flight Training."** *AIAA Scitech 2026 Forum*, Paper AIAA 2026-2734. https://doi.org/10.2514/6.2026-2734
 
