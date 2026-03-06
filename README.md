@@ -83,11 +83,167 @@ The statistically validated data structure provides the foundation for training 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/human-behavior-modeling.git
-cd human-behavior-modeling
+git clone https://github.com/mdmirah/Human-response-and-performance-modeling-for-AI-perception.git
+cd human-response-modeling
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Install the package (optional)
 pip install -e .
+```
+
+### Basic Usage
+
+```python
+from human_response_modeling import PerformanceStateAnalyzer
+import numpy as np
+
+# Create analyzer instance
+analyzer = PerformanceStateAnalyzer(sampling_freq=60)  # 60 Hz data
+
+# Load your data (example with synthetic data)
+time = np.arange(0, 300, 1/60)  # 5 minutes
+heart_rate = 70 + 10 * np.sin(2*np.pi*time/100)
+pupil = 3.5 + 0.5 * np.sin(2*np.pi*time/150)
+deviation = 1000 + 500 * np.sin(2*np.pi*time/200)
+rate = 10 + 5 * np.cos(2*np.pi*time/200)
+
+# Run F2Y state analysis
+results = analyzer.analyze(
+    heart_rate_data=heart_rate,
+    deviation_data=deviation,
+    rate_of_change_data=rate,
+    pupil_data=pupil,
+    time_data=time,
+    hr_threshold=80,  # Threshold for stress classification
+    min_time_jasat=150,  # JASAT time for dynamic thresholds
+    dataset_name="Sample Flight Data"
+)
+
+# Access high-quality temporal data
+print(f"Analysis complete! Found {results['statistics']['transitions']['total_state_changes']} state changes.")
+print(f"Time in optimal state (Relaxed Controlled): {results['statistics']['state_durations']['Relaxed Controlled']['total_duration_seconds']:.2f}s")
+
+# Extract transition matrix for AI training
+transition_matrix = results['statistics']['transitions']['transition_counts']
+
+# Extract episode characteristics for each state
+for state in results['statistics']['state_durations']:
+    stats = results['statistics']['state_durations'][state]
+    print(f"{state}: {stats['num_episodes']} episodes, "
+          f"avg duration: {stats['avg_duration_seconds']:.2f}s, "
+          f"total: {stats['total_duration_seconds']:.2f}s")
+```
+
+## 📈 Example Output and Data Structure
+
+The framework produces rich, structured data ideal for AI training:
+
+```python
+# Sample output structure
+{
+    'performance_states': ['Relaxed Controlled', 'Relaxed Controlled', ...],
+    'statistics': {
+        'state_durations': {
+            'Relaxed Controlled': {
+                'num_episodes': 12,
+                'avg_duration_seconds': 15.3,
+                'max_duration_seconds': 45.2,
+                'min_duration_seconds': 2.1,
+                'total_duration_seconds': 183.6,
+                'durations_seconds': [15.3, 22.1, ...]
+            },
+            # ... other states
+        },
+        'transitions': {
+            'transition_counts': {
+                'Relaxed Controlled → Stressed Controlled': 8,
+                'Stressed Controlled → Stressed Uncontrolled': 3,
+                # ... all transitions including self-transitions
+            },
+            'total_transitions': 1245,
+            'total_state_changes': 45
+        }
+    }
+}
+```
+
+## 🤖 Applications in Adaptive Autonomy
+
+The validated data from this framework enables several key applications:
+
+### 1. **Human State Prediction**
+Train sequence models (LSTM, Transformers) to predict upcoming state transitions based on recent history.
+
+### 2. **Adaptive Task Allocation**
+Use real-time state classification to dynamically adjust task difficulty or automation level.
+
+### 3. **Intervention Timing Optimization**
+Identify optimal moments for AI intervention based on historical transition patterns.
+
+### 4. **Personalized State Models**
+Learn individual operator baselines and adaptation patterns for personalized assistance.
+
+## 📚 Citation Guidelines
+
+The Fitness-to-Fly (F2Y) framework used in this study was originally proposed by 
+Rahman and Fala [1], and the implementation follows the open-source code repository 
+accompanying that work [2].
+
+[1] Rahman, M. M., and Fala, N., "A Multimodal Framework for Assessing Fitness to 
+    Fly in Flight Training," AIAA Scitech 2026 Forum, AIAA Paper 2026-2734, 2026.
+    doi: 10.2514/6.2026-2734
+
+[2] Rahman, M. M., and Fala, N., "Human response and Performance Modeling for 
+    AI Perception," GitHub repository, 2026. https://github.com/mdmirah/Human-response-and-performance-modeling-for-AI-perception
+
+### BibTeX Entries
+
+```bibtex
+@inproceedings{rahman2026multimodal,
+  title={A Multimodal Framework for Assessing Fitness to Fly in Flight Training},
+  author={Rahman, Md Mijanur and Fala, Nicoletta},
+  booktitle={AIAA Scitech 2026 Forum},
+  pages={2734},
+  year={2026},
+  doi={10.2514/6.2026-2734}
+}
+
+@software{rahman2026f2ycode,
+  author = {Rahman, Md Mijanur and Fala, Nicoletta},
+  title = {Human Behavior and Task Performance Modeling for AI Perception},
+  year = {2026},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/yourusername/human-behavior-modeling}}
+}
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## 📧 Contact
+
+For questions about the theoretical framework:
+- Md Mijanur Rahman - [mzr0182@auburn.edu]
+
+For code-related issues, please use the GitHub issue tracker.
+```
+
+The key additions include:
+
+1. **"Data Quality and Validation" section** highlighting the statistical significance and inherent structure
+2. **"Foundation for Human-AI Perception" section** explaining how this framework enables adaptive autonomy
+3. **Enhanced "Applications in Adaptive Autonomy" section** with specific use cases
+4. **Updated "Example Output and Data Structure"** showing the rich data format
+5. **Integration throughout** of the validation context and AI applications
+6. **Practical examples** of how the data can be used for AI training
+
+This positions the framework not just as an analysis tool, but as a foundational component for building adaptive AI systems.
