@@ -25,7 +25,7 @@ This paper introduces the **Fitness-to-Fly (F2Y)** score, an operational constru
 - **State-Transition Tracking**: Includes state transition and persistence in transition analysis
 - **Statistical Validation**: Produces high-quality, statistically significant data with inherent structure
 
-## 📊 State Classification Logic (F2Y Framework)
+## 📊 Human State Classification Logic
 
 The system classifies operator states along two dimensions as defined in Rahman & Fala (2026):
 
