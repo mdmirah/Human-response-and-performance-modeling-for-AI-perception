@@ -14,6 +14,8 @@ I originally publishhed the theoretical framework and core methodologyin this re
 This paper introduces the **Fitness-to-Fly (F2Y)** score, an operational construct built on this framework that integrates a pilot's heart rate with flight performance metrics to estimate their internal state of fitness. 
 **If you use this code in your research, please cite both the original paper (for the theoretical framework) and this repository (for the code implementation).**
 
+<img width="761" height="452" alt="image" src="https://github.com/user-attachments/assets/3954a3e7-a018-4088-99c4-eb5c44738fd5" />
+
 <img width="1391" height="701" alt="Screenshot 2026-03-05 104447" src="https://github.com/user-attachments/assets/5f1f51ba-5a93-455f-a3f7-2728d9c4dae3" />
 
 <img width="900" height="442" alt="image" src="https://github.com/user-attachments/assets/41ba38e3-7651-4ade-8220-848b373966df" />
